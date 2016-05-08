@@ -1,0 +1,31 @@
+{
+  "name": "build-tools",
+  "version": "1.0.0",
+  "description": "Tools for site builds",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "clean-css": "^3.4.12",
+    "less": "^2.7.0",
+    "ng-annotate": "^1.2.1",
+    "uglify-js": "^2.6.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "__build": "npm run less && npm run js",
+    "less": "npm run less-dev && npm run less-prod",
+    "less-dev": "lessc ./src/assets/css/*.less ./dev/assets/css/main.css --verbose --source-map=./dev/assets/css/main.css.map",
+    "less-prod": "lessc ./src/assets/css/*.less ./build/assets/css/main.css --clean-css --verbose --source-map=./build/assets/css/main.css.map",
+    "js": "npm run js-dev && npm run js-prod",
+    "js-dev": "cp ./src/assets/js/main.js ./dev/assets/js/main.js",
+    "__js-dev": "uglifyjs ./src/assets/js/main.js -o ./dev/assets/js/main.js --source-map ./dev/assets/js/main.js.map",
+    "js-prod": "uglifyjs ./src/assets/js/main.js -o ./build/assets/js/main.js --compress --mangle --source-map ./build/assets/js/main.js.map"
+  },
+  "repository": {
+    "type": "git",
+    "url": "build-tools"
+  },
+  "author": "Robin West",
+  "license": "ISC"
+}
